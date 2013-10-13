@@ -1,0 +1,61 @@
+Build your own regex engine
+
+Andrew Sellers
+GradesFirst
+
+* Why?
+
+We use regular expressions throughout GradesFirst
+
+Shouldn't you understand what you depend on?
+
+* Implementation
+
+This is a Thompson NFA (Nondeterministic Finite Automaton)
+
+Transliterated from a C implementation by Rob Pike
+
+From the book "Beautiful Code", borrowable
+
+* Supported Operations
+
+Anchors for front and end (^ and $)
+
+Optional Characters (?)
+
+Infinite repeating operations (* and +)
+
+Any character match (.)
+
+Exact character match (a-z, A-Z, 0-9, ...)
+
+* Implementation Details
+
+First implementation will start with simple string matches, then proceed to add features in an iterative fashion
+
+Each new feature is accompanied by tests, but tests are not shown for brevity
+
+Only implementation functions that change will be show in slides
+
+Implementations will use a class to iterate through strings with the interface
+
+  class Window
+    def new(text) # creates a new instance with characters from text var
+    def inc(n=1) # returns a new instance with the location incremented
+    def inc!(n=1) # increments the current instance and returns the new current
+    def current # returns the current character or EOF
+    def coming # returns the next character or EOF
+    def exhausted? # returns whether all characters have been read
+    def incomplete? # returns whether all the characters have not been read
+
+* First Implementation
+
+Matches substrings of text
+
+.code regex/first.rb /STARTIMPL /,/STOPIMPL /
+
+* Second Implementation
+
+Adds ^ operator
+
+.code regex/second.rb /STARTCHANGES /,/STOPCHANGES /

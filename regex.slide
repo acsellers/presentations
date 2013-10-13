@@ -27,7 +27,9 @@ Infinite repeating operations (* and +)
 
 Any character match (.)
 
-Exact character match (a-z, A-Z, 0-9, ...)
+Exact character match (abcdefghijklmnopqrstuvwxyzABC...)
+
+Character Ranges (a-z, A-Z, 0-9)
 
 * Implementation Details
 
@@ -48,14 +50,130 @@ Implementations will use a class to iterate through strings with the interface
     def exhausted? # returns whether all characters have been read
     def incomplete? # returns whether all the characters have not been read
 
-* First Implementation
+* Simple substring matching
 
-Matches substrings of text
+1. Scan through the text character by character
+
+2. On each character, we'll check to see if the pattern matches
+
+3. If we run out of the pattern when checking, return true
+
+4. If we run out of text, return nil
+
+* Implementation
 
 .code regex/first.rb /STARTIMPL /,/STOPIMPL /
 
-* Second Implementation
+* Add ^ operator
 
-Adds ^ operator
+The ^ meta-character specifies that the regex must start at beginning of the of the text
+
+1. If our regex has the ^ operator
+
+2. Don't loop through the text, just match against the front
+
+* Implementation
 
 .code regex/second.rb /STARTCHANGES /,/STOPCHANGES /
+
+* Add $ operator
+
+States that the regex must end at the same character as the text
+
+1. If we see the $ character, and it ends the regex
+
+2. Check whether the text is ended
+
+* Implementation
+
+.code regex/third.rb /STARTCHANGES /,/STOPCHANGES /
+
+Original 
+
+  def match_here(regex, text)
+    return true if regex.exhausted?
+
+    if text.incomplete? && regex.current == text.current
+      match_here(regex.inc, text.inc)
+    end
+  end
+
+* Add repeating operator *
+
+Allows a character to appear 0 or more times
+
+1. Check if the current character has the * operator attached
+
+2. Iterate through the text characters while they match the current character
+
+3. Each iteration, check to see if the remaining text would cause a match
+
+4. If we stop matching characters and we haven't hit a match, return nil
+
+* Implementation
+
+.code regex/fourth.rb /STARTCHANGES /,/STOPCHANGES /
+
+* Add repeating operator +
+
+Checks that the character happens at least once, but could happen many times
+
+1. See if our current regex character has the + operator
+
+2. Ensure that our current text character matches the current regex character
+
+3a. Increment text, then act like an * operator
+
+3b. Otherwise fail
+
+* Implementation
+
+.code regex/fifth.rb /STARTCHANGES /,/STOPCHANGES /
+
+* Optional Characters (?)
+
+Allows a character to appear once, or not appear
+
+1. If the current regex character is optional
+
+2. If the current text character matches the current regex character
+
+3. Check to see if we can match against the text after the current text character
+
+4. If we match after the current text character, we're done
+
+5. If the current text doesn't match the current regex or we can't find a match
+
+6. Try the match without the optional character
+
+* First refactor repeated code
+
+.code regex/sixth.rb /STARTREFACTOR /,/STOPREFACTOR /
+
+* Add features to implementation
+
+.code regex/sixth.rb /STARTCHANGES /,/STOPCHANGES /
+
+* Character Ranges
+
+Allow matching against a contiguous array of characters
+
+1. When comparing a character from the regex to a character in the text
+
+2. If the regex character is part of a range
+
+3. See if the text character is covered by the range
+
+We'll need two new classes for this
+
+* RangeCharacter Implementation
+
+.code regex/seventh.rb /STARTCHARACTER /,/STOPCHARACTER /
+
+* RegexWindow Implementation
+
+.code regex/seventh.rb /STARTWINDOW /,/STOPWINDOW /
+
+* Rubex Changes
+
+.code regex/seventh.rb /STARTCHANGES /,/STOPCHANGES /

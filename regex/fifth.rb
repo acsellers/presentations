@@ -133,15 +133,15 @@ class TestRubex < Minitest::Test
 
   def test_repeating_matches
     r = Rubex.new("st*")
-    %w{ st first sttars 23s4223j }.each do |item|
+    %w{ st stutter rust babies }.each do |item|
       assert(r.match_string(item), "Matching: #{item}")
     end
-    %w{ andrew 213420982 STELLAR }.each do |item|
+    %w{ Excel 54873 Smith }.each do |item|
       assert(!r.match_string(item), "Matching: #{item}")
     end
     # STARTTEST OMIT
     r = Rubex.new("st+")
-    %w{ st first sttars 23s4223jst }.each do |item|
+    %w{ stare twenty-first ast }.each do |item|
       assert(r.match_string(item), "Matching: #{item}")
     end
 

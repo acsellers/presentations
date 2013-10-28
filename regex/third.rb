@@ -114,10 +114,10 @@ class TestRubex < Minitest::Test
   def test_anchored_matches
     # STARTTEST OMIT
     r = Rubex.new("s$")
-    %w{ s firs ttars 23s4223js }.each do |item|
+    %w{ s firs Snakes jquery.js }.each do |item|
       assert(r.match_string(item), "Matching ($): #{item}")
     end
-    %w{ andrew st2st13420982 sSTELLAR }.each do |item|
+    %w{ sinistro klein javascript }.each do |item|
       assert(!r.match_string(item), "Not Matching ($): #{item}")
     end
     # STOPTEST OMIT

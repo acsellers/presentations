@@ -50,7 +50,7 @@ end
 # OMIT
 class RegexWindow < Window
   def current
-    if @current + 2 <= @text.length && @text[@current+1] == '-'
+    if @current + 2 < @text.length && @text[@current+1] == '-'
       RangeCharacter.new(@text[@current], @text[@current+2])
     else
       super
@@ -127,10 +127,10 @@ class Rubex
     loop do
       if match_here(regex, text)
         return true
-      elsif !(text.incomplete? && (text.current == char || char == '.'))
-        return
-      else
+      elsif text.incomplete? && (char == text.current|| char == '.')
         text.inc!
+      else
+        return
       end
     end
   end
@@ -224,18 +224,18 @@ class TestRubex < Minitest::Test
 
   # STARTTEST OMIT
   def test_ranges
-    r = Rubex.new("sa-z$")
-    %w{ st first ttarsn 23s4223jsa }.each do |item|
+    r = Rubex.new("sa-e$")
+    %w{ sb braise Seesa }.each do |item|
       assert(r.match_string(item), "Matching (range): #{item}")
     end
     %w{ andrew st2st13420982 sSTELLAR }.each do |item|
       assert(!r.match_string(item), "Not Matching (range): #{item}")
     end
-    r = Rubex.new("^st-v*")
-    %w{st sfirst sttars su23s4223j}.each do |item|
+    r = Rubex.new("^0-9*th")
+    %w{ 5th 345th 48th }.each do |item|
       assert(r.match_string(item), "Matching (range2): #{item}")
     end
-    %w{ andrew 2st13420982 STELLAR }.each do |item|
+    %w{ 51sts 2 Robotic }.each do |item|
       assert(!r.match_string(item), "Not Matching (range2): #{item}")
     end
   end

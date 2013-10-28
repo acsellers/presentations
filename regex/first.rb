@@ -92,25 +92,25 @@ class TestRubex < Minitest::Test
   # STARTTEST OMIT
   def test_empty_string_regex
     r = Rubex.new("")
-    %w{ first seconds 234223j andrew }.each do |item|
+    %w{ frist sheep 234223 andrew }.each do |item|
       assert(r.match_string(item))
     end
   end
   def test_substring_match
     r = Rubex.new("st")
-    %w{ st first stars 23st4223j }.each do |item|
+    %w{ st first steer 21st }.each do |item|
       assert(r.match_string(item), "Matching: #{item}")
     end
-    %w{ andrew 213420982 STELLAR }.each do |item|
+    %w{ andrew 213420982 s Starlite}.each do |item|
       assert(!r.match_string(item), "Matching: #{item}")
     end
   end
   def test_dot_match
     r = Rubex.new("s.")
-    %w{ st first stars 23st4223j }.each do |item|
+    %w{ st sw exhaust 21st> }.each do |item|
       assert(r.match_string(item), "Matching: #{item}")
     end
-    %w{ s andrew 213420982 STELLAR }.each do |item|
+    %w{ s andrew 213420982 billies }.each do |item|
       assert(!r.match_string(item), "Matching: #{item}")
     end
   end

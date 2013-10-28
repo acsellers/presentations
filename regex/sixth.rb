@@ -222,11 +222,11 @@ class TestRubex < Minitest::Test
 
   # STARTTEST OMIT
   def test_optional
-    r = Rubex.new("st?")
-    %w{ st first sttars 23s4223j }.each do |item|
+    r = Rubex.new("sh?")
+    %w{ cars shamu shirking happenings }.each do |item|
       assert(r.match_string(item), "Matching: #{item}")
     end
-    %w{ andrew 213420982 STELLAR }.each do |item|
+    %w{ bob 123498345 Shamu }.each do |item|
       assert(!r.match_string(item), "Matching: #{item}")
     end
   end

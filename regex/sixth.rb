@@ -218,8 +218,19 @@ class TestRubex < Minitest::Test
     %w{ andrew 213420982 STELLAR }.each do |item|
       assert(!r.match_string(item), "Matching: #{item}")
     end
-
   end
+
+  # STARTTEST OMIT
+  def test_optional
+    r = Rubex.new("st?")
+    %w{ st first sttars 23s4223j }.each do |item|
+      assert(r.match_string(item), "Matching: #{item}")
+    end
+    %w{ andrew 213420982 STELLAR }.each do |item|
+      assert(!r.match_string(item), "Matching: #{item}")
+    end
+  end
+  # STOPTEST OMIT
 
   def test_anchored_matches
     r = Rubex.new("st*$")

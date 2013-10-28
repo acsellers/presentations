@@ -42,7 +42,7 @@ class Rubex
 
     if regex.current == '$' && regex.coming == Window::EOF
       text.exhausted?
-    elsif text.incomplete? && (regex.current == '.' || regex.current == text.current)
+    elsif text.incomplete? && regex.current == text.current
       match_here(regex.inc, text.inc)
     end
   end
@@ -110,7 +110,9 @@ class TestRubex < Minitest::Test
     end
   end
 
+
   def test_anchored_matches
+    # STARTTEST OMIT
     r = Rubex.new("s$")
     %w{ s firs ttars 23s4223js }.each do |item|
       assert(r.match_string(item), "Matching ($): #{item}")
@@ -118,6 +120,7 @@ class TestRubex < Minitest::Test
     %w{ andrew st2st13420982 sSTELLAR }.each do |item|
       assert(!r.match_string(item), "Not Matching ($): #{item}")
     end
+    # STOPTEST OMIT
     r = Rubex.new("^s")
     %w{st sfirst sttars s23s4223j}.each do |item|
       assert(r.match_string(item), "Matching (^): #{item}")

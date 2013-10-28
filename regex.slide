@@ -64,6 +64,10 @@ Implementations will use a class to iterate through strings with the interface
 
 .code regex/first.rb /STARTIMPL /,/STOPIMPL /
 
+* Tests
+
+.code regex/first.rb /STARTTEST /,/STOPTEST /
+
 * Add ^ operator
 
 The ^ meta-character specifies that the regex must start at beginning of the of the text
@@ -75,6 +79,10 @@ The ^ meta-character specifies that the regex must start at beginning of the of 
 * Implementation
 
 .code regex/second.rb /STARTCHANGES /,/STOPCHANGES /
+
+* Tests
+
+.code regex/second.rb /STARTTEST /,/STOPTEST /
 
 * Add $ operator
 
@@ -98,6 +106,10 @@ Original
     end
   end
 
+* Tests
+
+.code regex/third.rb /STARTTEST /,/STOPTEST /
+
 * Add repeating operator *
 
 Allows a character to appear 0 or more times
@@ -114,6 +126,10 @@ Allows a character to appear 0 or more times
 
 .code regex/fourth.rb /STARTCHANGES /,/STOPCHANGES /
 
+* Tests
+
+.code regex/fourth.rb /STARTTEST /,/STOPTEST /
+
 * Add repeating operator +
 
 Checks that the character happens at least once, but could happen many times
@@ -129,6 +145,10 @@ Checks that the character happens at least once, but could happen many times
 * Implementation
 
 .code regex/fifth.rb /STARTCHANGES /,/STOPCHANGES /
+
+* Tests
+
+.code regex/fifth.rb /STARTTEST /,/STOPTEST /
 
 * Optional Characters (?)
 
@@ -154,6 +174,10 @@ Allows a character to appear once, or not appear
 
 .code regex/sixth.rb /STARTCHANGES /,/STOPCHANGES /
 
+* Tests
+
+.code regex/sixth.rb /STARTTEST /,/STOPTEST /
+
 * Character Ranges
 
 Allow matching against a contiguous array of characters
@@ -177,3 +201,7 @@ We'll need two new classes for this
 * Rubex Changes
 
 .code regex/seventh.rb /STARTCHANGES /,/STOPCHANGES /
+
+* Tests
+
+.code regex/seventh.rb /STARTTEST /,/STOPTEST /

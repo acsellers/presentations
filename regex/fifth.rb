@@ -139,6 +139,7 @@ class TestRubex < Minitest::Test
     %w{ andrew 213420982 STELLAR }.each do |item|
       assert(!r.match_string(item), "Matching: #{item}")
     end
+    # STARTTEST OMIT
     r = Rubex.new("st+")
     %w{ st first sttars 23s4223jst }.each do |item|
       assert(r.match_string(item), "Matching: #{item}")
@@ -147,7 +148,7 @@ class TestRubex < Minitest::Test
     %w{ andrew 213420982 STELLAR }.each do |item|
       assert(!r.match_string(item), "Matching: #{item}")
     end
-
+    # STOPTEST OMIT
   end
 
   def test_anchored_matches

@@ -89,6 +89,7 @@ class TestWindow < Minitest::Test
 end
 
 class TestRubex < Minitest::Test
+  # STARTTEST OMIT
   def test_empty_string_regex
     r = Rubex.new("")
     %w{ first seconds 234223j andrew }.each do |item|
@@ -105,4 +106,5 @@ class TestRubex < Minitest::Test
       assert(!r.match_string(item), "Matching: #{item}")
     end
   end
+  # STOPTEST OMIT
 end

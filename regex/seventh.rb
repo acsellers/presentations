@@ -201,7 +201,8 @@ class TestRubex < Minitest::Test
     %w{ andrew 213420982 STELLAR }.each do |item|
       assert(!r.match_string(item), "Matching: #{item}")
     end
-
+    r = Rubex.new("st*tt")
+    assert(r.match_string("stttt"))
   end
 
   def test_anchored_matches
@@ -221,6 +222,7 @@ class TestRubex < Minitest::Test
     end
   end
 
+  # STARTTEST OMIT
   def test_ranges
     r = Rubex.new("sa-z$")
     %w{ st first ttarsn 23s4223jsa }.each do |item|
@@ -237,5 +239,5 @@ class TestRubex < Minitest::Test
       assert(!r.match_string(item), "Not Matching (range2): #{item}")
     end
   end
-
+  # STOPTEST OMIT
 end

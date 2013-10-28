@@ -42,8 +42,7 @@ class Rubex
     if regex.current == '^'
       return match_here(regex.inc, text) 
     end
-
-    loop do
+loop do
       return true if match_here(regex, text)
       return if text.inc! == Window::EOF
     end
@@ -111,6 +110,7 @@ class TestRubex < Minitest::Test
   end
 
   def test_anchored_matches
+    # STARTTEST OMIT
     r = Rubex.new("^s")
     %w{st sfirst sttars s23s4223j}.each do |item|
       assert(r.match_string(item), "Matching (^): #{item}")
@@ -118,5 +118,6 @@ class TestRubex < Minitest::Test
     %w{ andrew 2st13420982 STELLAR }.each do |item|
       assert(!r.match_string(item), "Not Matching (^): #{item}")
     end
+    # STOPTEST OMIT
   end
 end

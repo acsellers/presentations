@@ -52,7 +52,7 @@ Implementations will use a class to iterate through strings with the interface
     def exhausted? # returns whether all characters have been read
     def incomplete? # returns whether all the characters have not been read
 
-* Simple substring matching
+* Simple substring matching and . matching
 
 1. Scan through the text character by character
 
@@ -61,6 +61,8 @@ Implementations will use a class to iterate through strings with the interface
 3. If we run out of the pattern when checking, return true
 
 4. If we run out of text, return nil
+
+5. When checking a character, the characters must match or the regex character must be .
 
 * Implementation
 
@@ -103,7 +105,7 @@ Original
   def match_here(regex, text)
     return true if regex.exhausted?
 
-    if text.incomplete? && regex.current == text.current
+    if text.incomplete? && (regex.current == text.current || regex.current == ".")
       match_here(regex.inc, text.inc)
     end
   end

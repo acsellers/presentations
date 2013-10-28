@@ -58,7 +58,7 @@ class Rubex
   def match_here(regex, text)
     return true if regex.exhausted?
 
-    if text.incomplete? && regex.current == text.current
+    if text.incomplete? && (regex.current == text.current || regex.current == ".")
       match_here(regex.inc, text.inc)
     end
   end
@@ -96,13 +96,21 @@ class TestRubex < Minitest::Test
       assert(r.match_string(item))
     end
   end
-
   def test_substring_match
     r = Rubex.new("st")
     %w{ st first stars 23st4223j }.each do |item|
       assert(r.match_string(item), "Matching: #{item}")
     end
     %w{ andrew 213420982 STELLAR }.each do |item|
+      assert(!r.match_string(item), "Matching: #{item}")
+    end
+  end
+  def test_dot_match
+    r = Rubex.new("s.")
+    %w{ st first stars 23st4223j }.each do |item|
+      assert(r.match_string(item), "Matching: #{item}")
+    end
+    %w{ s andrew 213420982 STELLAR }.each do |item|
       assert(!r.match_string(item), "Matching: #{item}")
     end
   end

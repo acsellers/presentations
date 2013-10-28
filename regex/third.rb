@@ -42,7 +42,7 @@ class Rubex
 
     if regex.current == '$' && regex.coming == Window::EOF
       text.exhausted?
-    elsif text.incomplete? && regex.current == text.current
+    elsif text.incomplete? && (regex.current == text.current || regex.current == ".")
       match_here(regex.inc, text.inc)
     end
   end

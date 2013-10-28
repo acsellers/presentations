@@ -42,7 +42,8 @@ class Rubex
     if regex.current == '^'
       return match_here(regex.inc, text) 
     end
-loop do
+
+    loop do
       return true if match_here(regex, text)
       return if text.inc! == Window::EOF
     end

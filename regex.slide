@@ -3,11 +3,11 @@ Build your own regex engine
 Andrew Sellers
 GradesFirst
 
-* Why?
+* Inspiration
 
-We use regular expressions throughout GradesFirst
+Regular expressions are likely the most common programming DSL
 
-Shouldn't you understand what you depend on?
+Always curious what lay behind the curtain
 
 * Implementation
 
@@ -15,7 +15,9 @@ This is a Thompson NFA (Nondeterministic Finite Automaton)
 
 Transliterated from a C implementation by Rob Pike
 
-From the book "Beautiful Code", borrowable
+From the book "Beautiful Code", section by Brian Kernighan
+
+Originally from "The Practice of Programming" Chapter 9 (Kernighan & Pike)
 
 * Supported Operations
 
